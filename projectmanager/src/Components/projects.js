@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProjectItem from './ProjectItem';
+import PropTypes from 'prop-types';
 
 class Projects extends Component {
   deleteProject( id ) {
@@ -29,5 +30,10 @@ class Projects extends Component {
     );
   }
 }
+
+Projects.propTypes = {
+  projects: PropTypes.array,
+  onDelete: PropTypes.func
+};
 
 export default Projects;
