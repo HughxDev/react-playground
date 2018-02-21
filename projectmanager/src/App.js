@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
+import uuid from 'uuid';
+import $ from 'jquery';
 import Projects from './Components/Projects';
 import AddProject from './Components/AddProject';
-import uuid from 'uuid';
 // import './App.css';
 
 class App extends Component {
@@ -13,8 +14,13 @@ class App extends Component {
     };
   }
 
-  // Lifecycle method, fires every time component is re-rendered
-  componentWillMount() {
+  getTodos() {
+    $.ajax( {
+      url: 'https://jsonplaceholder.typicode.com/todos'
+    } );
+  }
+
+  getProjects() {
     this.setState( {
       projects: [
         {
@@ -33,7 +39,17 @@ class App extends Component {
           category: 'Web Development'
         }
       ]
-    } );
+    } ); // setState
+  }
+
+  // Lifecycle method, fires every time component is re-rendered
+  componentWillMount() {
+    this.getProjects();
+    this.getTodos();
+  }
+
+  componentDidMount() {
+    this.getTodos();
   }
 
   handleAddProject( project ) {
